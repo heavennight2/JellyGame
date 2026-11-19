@@ -1,0 +1,70 @@
+{
+	"height": 180,
+	"layers": [
+		{
+			"file": "layers/00_sky.png",
+			"scroll_scale": 0.0,
+			"speed": 0,
+			"type": "sky",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/01_light_rays.png",
+			"scroll_scale": 0.167,
+			"speed": 1,
+			"type": "rays",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/02_fish.png",
+			"scroll_scale": 0.167,
+			"speed": 1,
+			"type": "fish",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/03_hills.png",
+			"scroll_scale": 0.167,
+			"speed": 1,
+			"type": "hills",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/04_kelp_and_coral.png",
+			"scroll_scale": 0.333,
+			"speed": 2,
+			"type": "kelp",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/05_bubbles.png",
+			"scroll_scale": 0.5,
+			"speed": 3,
+			"type": "bubbles",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/06_fish.png",
+			"scroll_scale": 0.667,
+			"speed": 4,
+			"type": "fish",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/07_kelp_and_coral.png",
+			"scroll_scale": 0.833,
+			"speed": 5,
+			"type": "kelp",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/08_ground.png",
+			"scroll_scale": 1.0,
+			"speed": 6,
+			"type": "ground",
+			"vspeed": 0
+		}
+	],
+	"note": "scroll_scale: 0 = fixed to the camera, 1 = moves with the world. Layers tile horizontally.",
+	"width": 320
+}

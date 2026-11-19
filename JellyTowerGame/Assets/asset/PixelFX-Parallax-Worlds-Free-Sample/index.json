@@ -1,0 +1,77 @@
+{
+	"backgrounds": [
+		{
+			"folder": "forest_by_day/320x180/default",
+			"scene": "Bosque de día",
+			"size": "320x180",
+			"variant": "default"
+		},
+		{
+			"folder": "forest_by_day/320x180/dawn",
+			"scene": "Bosque de día",
+			"size": "320x180",
+			"variant": "dawn"
+		},
+		{
+			"folder": "forest_by_day/320x180/dusk",
+			"scene": "Bosque de día",
+			"size": "320x180",
+			"variant": "dusk"
+		},
+		{
+			"folder": "forest_by_day/320x180/night",
+			"scene": "Bosque de día",
+			"size": "320x180",
+			"variant": "night"
+		},
+		{
+			"folder": "forest_by_day/320x180/spring",
+			"scene": "Bosque de día",
+			"size": "320x180",
+			"variant": "spring"
+		},
+		{
+			"folder": "forest_by_day/320x180/autumn",
+			"scene": "Bosque de día",
+			"size": "320x180",
+			"variant": "autumn"
+		},
+		{
+			"folder": "forest_by_day/320x180/winter",
+			"scene": "Bosque de día",
+			"size": "320x180",
+			"variant": "winter"
+		},
+		{
+			"folder": "under_the_sea/320x180/default",
+			"scene": "Bajo el mar",
+			"size": "320x180",
+			"variant": "default"
+		},
+		{
+			"folder": "heart_world/320x180/default",
+			"scene": "Mundo de corazones",
+			"size": "320x180",
+			"variant": "default"
+		},
+		{
+			"folder": "heart_world/320x180/dawn",
+			"scene": "Mundo de corazones",
+			"size": "320x180",
+			"variant": "dawn"
+		},
+		{
+			"folder": "heart_world/320x180/dusk",
+			"scene": "Mundo de corazones",
+			"size": "320x180",
+			"variant": "dusk"
+		},
+		{
+			"folder": "heart_world/320x180/night",
+			"scene": "Mundo de corazones",
+			"size": "320x180",
+			"variant": "night"
+		}
+	],
+	"name": "PixelFX Parallax Worlds - Free Sample"
+}

@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Texture2D" path="res://parallax/pixelfx-parallax-worlds-free-sample/forest_by_day/320x180/night/layers/00_sky.png" id="1"]
+[ext_resource type="Texture2D" path="res://parallax/pixelfx-parallax-worlds-free-sample/forest_by_day/320x180/night/layers/01_stars.png" id="2"]
+[ext_resource type="Texture2D" path="res://parallax/pixelfx-parallax-worlds-free-sample/forest_by_day/320x180/night/layers/02_clouds.png" id="3"]
+[ext_resource type="Texture2D" path="res://parallax/pixelfx-parallax-worlds-free-sample/forest_by_day/320x180/night/layers/03_mountains.png" id="4"]
+[ext_resource type="Texture2D" path="res://parallax/pixelfx-parallax-worlds-free-sample/forest_by_day/320x180/night/layers/04_hills.png" id="5"]
+[ext_resource type="Texture2D" path="res://parallax/pixelfx-parallax-worlds-free-sample/forest_by_day/320x180/night/layers/05_forest.png" id="6"]
+[ext_resource type="Texture2D" path="res://parallax/pixelfx-parallax-worlds-free-sample/forest_by_day/320x180/night/layers/06_forest.png" id="7"]
+[ext_resource type="Texture2D" path="res://parallax/pixelfx-parallax-worlds-free-sample/forest_by_day/320x180/night/layers/07_ground.png" id="8"]
+
+[node name="ParallaxBackground" type="Node2D"]
+texture_filter = 1
+
+[node name="00_sky" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.0, 1)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="00_sky"]
+texture = ExtResource("1")
+centered = false
+
+[node name="01_stars" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.0, 1)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="01_stars"]
+texture = ExtResource("2")
+centered = false
+
+[node name="02_clouds" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.167, 1)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="02_clouds"]
+texture = ExtResource("3")
+centered = false
+
+[node name="03_mountains" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.167, 1)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="03_mountains"]
+texture = ExtResource("4")
+centered = false
+
+[node name="04_hills" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.333, 1)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="04_hills"]
+texture = ExtResource("5")
+centered = false
+
+[node name="05_forest" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 1)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="05_forest"]
+texture = ExtResource("6")
+centered = false
+
+[node name="06_forest" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.833, 1)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="06_forest"]
+texture = ExtResource("7")
+centered = false
+
+[node name="07_ground" type="Parallax2D" parent="."]
+scroll_scale = Vector2(1.0, 1)
+repeat_size = Vector2(320, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="07_ground"]
+texture = ExtResource("8")
+centered = false

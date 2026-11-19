@@ -1,0 +1,56 @@
+{
+	"height": 180,
+	"layers": [
+		{
+			"file": "layers/00_sky.png",
+			"scroll_scale": 0.0,
+			"speed": 0,
+			"type": "sky",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/01_clouds.png",
+			"scroll_scale": 0.167,
+			"speed": 1,
+			"type": "clouds",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/02_mountains.png",
+			"scroll_scale": 0.167,
+			"speed": 1,
+			"type": "mountains",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/03_hills.png",
+			"scroll_scale": 0.333,
+			"speed": 2,
+			"type": "hills",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/04_forest.png",
+			"scroll_scale": 0.5,
+			"speed": 3,
+			"type": "pines",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/05_forest.png",
+			"scroll_scale": 0.833,
+			"speed": 5,
+			"type": "pines",
+			"vspeed": 0
+		},
+		{
+			"file": "layers/06_ground.png",
+			"scroll_scale": 1.0,
+			"speed": 6,
+			"type": "ground",
+			"vspeed": 0
+		}
+	],
+	"note": "scroll_scale: 0 = fixed to the camera, 1 = moves with the world. Layers tile horizontally.",
+	"width": 320
+}
