@@ -25,16 +25,19 @@ public class JellySpawner : MonoBehaviour
     private Camera mainCamera;
     private GameObject currentJelly;
     private Rigidbody2D currentRB;
+    private JellyGrow currentGrow;
 
     private List<Rigidbody2D> droppedJellies =
         new List<Rigidbody2D>();
 
     private float timer;
     private float currentSpawnY;
+    private float originalHeight;
     private float highestTowerTop;
     private float startingCameraY;
     private float targetCameraY;
 
+    private bool holdingSpace;
     private bool waitingForNext;
 
     void Start()
@@ -59,28 +62,63 @@ public class JellySpawner : MonoBehaviour
 
     void Update()
     {
-        if (currentJelly == null)
+        if (currentJelly == null ||
+            Keyboard.current == null)
             return;
 
+        var space = Keyboard.current.spaceKey;
+
+        // Move the jelly left and right
         timer += Time.deltaTime;
 
-        float x = Mathf.Sin(timer * moveSpeed)
-                  * moveRange;
+        float x = Mathf.Sin(
+            timer * moveSpeed
+        ) * moveRange;
+
+        // Hold SPACE to grow before dropping
+        if (space.wasPressedThisFrame)
+        {
+            holdingSpace = true;
+        }
+
+        if (holdingSpace &&
+            space.isPressed &&
+            currentGrow != null)
+        {
+            currentGrow.Grow();
+        }
+
+        // Keep the bottom at the same spawn position
+        float extraHeight = 0f;
+
+        if (currentGrow != null)
+        {
+            extraHeight =
+                currentGrow.CurrentHeight -
+                originalHeight;
+        }
 
         currentJelly.transform.position =
-            new Vector3(x, currentSpawnY, 0f);
+            new Vector3(
+                x,
+                currentSpawnY + extraHeight * 0.5f,
+                0f
+            );
 
-        if (Keyboard.current != null &&
-            Keyboard.current.spaceKey.wasPressedThisFrame)
+        UpdateCameraTarget();
+
+        // Release SPACE to drop
+        if (holdingSpace &&
+            space.wasReleasedThisFrame)
         {
+            holdingSpace = false;
             DropJelly();
         }
     }
 
     void LateUpdate()
     {
-        if (mainCamera == null)
-            return;
+        if (mainCamera == null) return;
 
         Vector3 position =
             mainCamera.transform.position;
@@ -109,16 +147,23 @@ public class JellySpawner : MonoBehaviour
 
         currentJelly = Instantiate(
             jellyPrefab,
-            new Vector3(0, currentSpawnY, 0),
+            new Vector3(0f, currentSpawnY, 0f),
             Quaternion.identity
         );
 
         currentRB =
             currentJelly.GetComponent<Rigidbody2D>();
 
-        if (currentRB == null)
+        currentGrow =
+            currentJelly.GetComponent<JellyGrow>();
+
+        if (currentRB == null ||
+            currentGrow == null)
         {
-            Debug.LogError("Jelly needs Rigidbody2D!");
+            Debug.LogError(
+                "Jelly needs Rigidbody2D and JellyGrow!"
+            );
+
             Destroy(currentJelly);
             currentJelly = null;
             return;
@@ -128,39 +173,56 @@ public class JellySpawner : MonoBehaviour
         currentRB.linearVelocity = Vector2.zero;
         currentRB.angularVelocity = 0f;
 
+        originalHeight = currentGrow.CurrentHeight;
+
         timer = 0f;
+        holdingSpace = false;
         waitingForNext = false;
     }
 
     void DropJelly()
     {
-        if (waitingForNext || currentJelly == null)
+        if (waitingForNext ||
+            currentJelly == null)
             return;
 
         Rigidbody2D droppedRB = currentRB;
 
-        droppedRB.bodyType = RigidbodyType2D.Dynamic;
+        float grownHeight =
+            currentGrow != null
+                ? currentGrow.GrownHeight
+                : 0f;
+
+        droppedRB.bodyType =
+            RigidbodyType2D.Dynamic;
+
+        droppedRB.simulated = true;
         droppedRB.linearVelocity = Vector2.zero;
         droppedRB.angularVelocity = 0f;
-        droppedRB.simulated = true;
 
         droppedJellies.Add(droppedRB);
 
         currentJelly = null;
         currentRB = null;
+        currentGrow = null;
+
         waitingForNext = true;
 
-        StartCoroutine(PrepareNextJelly(droppedRB));
+        StartCoroutine(
+            PrepareNextJelly(droppedRB, grownHeight)
+        );
     }
 
-    IEnumerator PrepareNextJelly(Rigidbody2D droppedRB)
+    IEnumerator PrepareNextJelly(
+        Rigidbody2D droppedRB,
+        float grownHeight)
     {
         yield return new WaitForSeconds(spawnDelay);
 
         float elapsed = 0f;
         float stableTime = 0f;
+        bool landed = false;
 
-        // Give the dropped jelly time to settle
         while (elapsed < 5f)
         {
             yield return new WaitForFixedUpdate();
@@ -185,7 +247,21 @@ public class JellySpawner : MonoBehaviour
                 stableTime = 0f;
 
             if (stableTime >= 0.3f)
+            {
+                landed = true;
                 break;
+            }
+        }
+
+        // Award growth points after stable landing
+        if (landed &&
+            droppedRB != null &&
+            Mathf.Abs(droppedRB.position.x) <= 2f &&
+            JellyScore.Instance != null)
+        {
+            JellyScore.Instance.AddGrowthPoints(
+                grownHeight
+            );
         }
 
         UpdateTowerHeight();
@@ -195,12 +271,13 @@ public class JellySpawner : MonoBehaviour
             highestTowerTop - cameraOffset
         );
 
-        // Wait until the camera reaches the new height
-        while (mainCamera != null &&
-               Mathf.Abs(
-                   mainCamera.transform.position.y -
-                   targetCameraY
-               ) > 0.05f)
+        while (
+            mainCamera != null &&
+            Mathf.Abs(
+                mainCamera.transform.position.y -
+                targetCameraY
+            ) > 0.05f
+        )
         {
             yield return null;
         }
@@ -208,12 +285,30 @@ public class JellySpawner : MonoBehaviour
         SpawnJelly();
     }
 
+    void UpdateCameraTarget()
+    {
+        if (currentJelly == null ||
+            mainCamera == null)
+            return;
+
+        Collider2D col =
+            currentJelly.GetComponent<Collider2D>();
+
+        if (col == null) return;
+
+        float top = col.bounds.max.y;
+
+        targetCameraY = Mathf.Max(
+            startingCameraY,
+            top - mainCamera.orthographicSize + 1f
+        );
+    }
+
     void UpdateTowerHeight()
     {
         foreach (Rigidbody2D rb in droppedJellies)
         {
-            if (rb == null)
-                continue;
+            if (rb == null) continue;
 
             Collider2D col =
                 rb.GetComponent<Collider2D>();
@@ -221,15 +316,12 @@ public class JellySpawner : MonoBehaviour
             if (col == null || !col.enabled)
                 continue;
 
-            // Ignore pieces that are still flying
             if (rb.linearVelocity.magnitude > 0.5f)
                 continue;
 
-            // Ignore pieces far outside the tower
             if (Mathf.Abs(rb.position.x) > 2f)
                 continue;
 
-            // Only count pieces touching something
             if (!col.IsTouchingLayers())
                 continue;
 

@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 2090094070230055667}
   - component: {fileID: 3444896643866683242}
   - component: {fileID: 8647097631924397418}
-  - component: {fileID: 7885049319559064277}
-  - component: {fileID: -2676335003927586775}
-  - component: {fileID: -7453202963552085750}
+  - component: {fileID: 76082926166327225}
   m_Layer: 0
   m_Name: Jelly
   m_TagString: Untagged
@@ -99,7 +97,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.007364452, y: 0.0075955987}
+  m_Offset: {x: -0.01, y: 0.04}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,7 +126,7 @@ MonoBehaviour:
   wobbleDuration: 0.8
   wobbleSpeed: 14
   minimumImpact: 0.5
---- !u!114 &7885049319559064277
+--- !u!114 &76082926166327225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,41 +135,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3993960638908981697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40724f98746be4c1b8d427cf2f5f646f, type: 3}
+  m_Script: {fileID: 11500000, guid: 67a044649de9b45f48b5d67359a5d781, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::JellyColor
-  colors:
-  - {r: 1, g: 0.58, b: 0.75, a: 1}
-  - {r: 0.55, g: 0.78, b: 1, a: 1}
-  - {r: 1, g: 0.87, b: 0.45, a: 1}
-  - {r: 0.55, g: 0.9, b: 0.7, a: 1}
-  colorIndex: 0
---- !u!114 &-2676335003927586775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3993960638908981697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66d8237d31a6b4ef1bb2fe521c21c07b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::JellyMatch
-  pointsPerMatch: 10
---- !u!114 &-7453202963552085750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3993960638908981697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b12908a2913c8432189a975715143fdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::JellyScore
-  score: 0
+  m_EditorClassIdentifier: Assembly-CSharp::JellyGrow
+  growthSpeed: 0.8
+  maxHeight: 3
 --- !u!1 &4230275330560157067
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,8 +166,8 @@ Transform:
   m_GameObject: {fileID: 4230275330560157067}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalPosition: {x: 0, y: 0.00000059605, z: 0}
+  m_LocalScale: {x: 1.6576368, y: 1.6576368, z: 0.16576366}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7060711845979550311}
@@ -251,10 +219,10 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.95485044, g: 0.6179246, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 304b7549897294895af5e9e62fed5168, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
